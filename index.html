@@ -1020,6 +1020,15 @@
     // Enhanced form submission with better UX
     document.getElementById('contactForm').addEventListener('submit', async (e) => {
       e.preventDefault();
+// --- בדיקת שם מלא ומספר טלפון חוקי בישראל ---
+const nameValue = nameInput.value.trim();
+const rawPhone = phoneInput.value.trim().replace(/[-\s]/g, '');
+const phoneRegex = /^0?5\d{8}$/;  // פורמט ישראלי: 05X + 8 ספרות
+if (nameValue.length < 2 || !phoneRegex.test(rawPhone)) {
+  alert('נא להזין שם מלא (לפחות 2 תווים) ומספר טלפון חוקי בישראל');
+  return;  // מונע המשך השליחה
+}
+// --- סוף הבדיקה ---
       
       if (!isVerified) {
         alert('אנא אשר שאתה לא רובוט על ידי לחיצה על סמל הלב ❤️');
